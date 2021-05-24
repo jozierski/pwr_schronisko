@@ -1,4 +1,6 @@
-
+<?php
+    session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -31,6 +33,19 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                                <?php
+                                if (isset($_SESSION['zalogowany']) && ($_SESSION['zalogowany'])==true) {
+                                    echo "<a class='nav-link' href='./scryptLogoff.php'>";
+                                    echo 'wyloguj';
+                                    echo "</a>";
+                                } else{
+                                    echo "<a class='nav-link' href='./scryptLogin.php'>";
+                                    echo 'zaloguj';
+                                    echo "</a>";
+                                }
+                                ?>
                         </li>
                      </ul>
                 </div>

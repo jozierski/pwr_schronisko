@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (isset($_SESSION['zalogowany']) && ($_SESSION['zalogowany'])==true) {
+    header('Location: index.php');
+    exit();
+}
+?>
 
 <!doctype html>
 <html lang="en">
@@ -18,14 +25,14 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
             <div class="container">
-              <p><a href="home.html"><img style="width: 150px; margin-right: 20px" src="src/logo.png"></a></p>
+              <p><a href="home.php"><img style="width: 150px; margin-right: 20px" src="src/logo.png"></a></p>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="home.html">Strona Główna</a>
+                            <a class="nav-link" href="home.php">Strona Główna</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
@@ -47,9 +54,15 @@
         <hr class="featurette-divider">
         
             <!-- Login Form -->
-            <form style="text-align: center;">
-              <input type="text" id="login" name="login" placeholder="login"><br><br>
-              <input type="password" id="password" name="login" placeholder="hasło"><br><br>
+            <form style="text-align: center;" action="./scryptLogin.php" method="post">
+              <input type="text" id="login" name="login" placeholder="login"value="
+<?php
+	if (isset($_SESSION['fl_login'])){
+		echo $_SESSION['fl_login'];
+//		unset($_SESSION['fl_login']);
+	}
+?>"> <br><br>
+              <input type="password" id="password" name="password" placeholder="hasło"><br><br>
               <input type="submit" class="btn btn-md btn-primary" value="Zaloguj">
             </form>
 
