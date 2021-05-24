@@ -31,9 +31,15 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="#">Strona Główna</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
+
+                        <?php
+                        if (isset($_SESSION['uprawnienia']) && $_SESSION['uprawnienia']=='admin'){
+                            echo '<li class="nav-item">';
+                            echo '<a class="nav-link" href="add.php">Utwórz konto</a>';
+                            echo '</li>';
+                        }
+                        ?>
+
                         <li class="nav-item">
                                 <?php
                                 if (isset($_SESSION['zalogowany']) && ($_SESSION['zalogowany'])==true) {
@@ -45,8 +51,10 @@
                                     echo 'zaloguj';
                                     echo "</a>";
                                 }
+
                                 ?>
                         </li>
+
                      </ul>
                 </div>
             </div>

@@ -34,6 +34,7 @@
 
 						//ustawianie zmiennych sesyjnych
 						$_SESSION['zalogowany']=true;
+						$_SESSION['uprawnienia']=$wiersz['uprawnienia'];
 
 					$rezultat->close();
 					header('Location: ./home.php');
