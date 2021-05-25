@@ -1,11 +1,7 @@
 <?php
 session_start();
-if (isset($_SESSION['zalogowany']) && ($_SESSION['zalogowany']) == true) {
-  header('Location: index.php');
-  exit();
-}
+require_once('dataBase.php');
 ?>
-
 <!doctype html>
 <html lang="en">
 
@@ -13,7 +9,9 @@ if (isset($_SESSION['zalogowany']) && ($_SESSION['zalogowany']) == true) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Login | Wesoły Zwierzak</title>
+  <title>Error | Wesoły Zwierzak</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
 
   <!-- Bootstrap core CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
@@ -23,9 +21,14 @@ if (isset($_SESSION['zalogowany']) && ($_SESSION['zalogowany']) == true) {
 </head>
 
 <body>
-
   <header>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
+      <?php
+      if (isset($_SESSION['zalogowany']) && ($_SESSION['zalogowany']) == true) {
+        echo "<p class='text-right'>&nbsp&nbspZalogowano jako: ";
+        echo $_SESSION['imie'], " ", $_SESSION['nazwisko'], "</p>";
+      }
+      ?>
       <div class="container">
         <img style="width: 150px; margin-right: 20px" src="src/logo.png">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,58 +55,33 @@ if (isset($_SESSION['zalogowany']) && ($_SESSION['zalogowany']) == true) {
             }
             ?>
 
-            <li class="nav-item">
-              <?php
-              if (isset($_SESSION['zalogowany']) && ($_SESSION['zalogowany']) == true) {
-                echo '<li class="nav-item">';
-                echo "<a class='nav-link' href='./manage_animals.php'>Zarządzaj zwierzętami</a>";
-                echo '</li>';
+            <?php
+            if (isset($_SESSION['zalogowany']) && ($_SESSION['zalogowany']) == true) {
+              echo '<li class="nav-item">';
+              echo "<a class='nav-link' href='./manage_animals.php'>Zarządzaj zwierzętami</a>";
+              echo '</li>';
 
-                echo '<li class="nav-item">';
-                echo "<a class='nav-link' href='./scryptLogoff.php'>Wyloguj</a>";
-                echo '</li>';
-              } else {
-                echo '<li class="nav-item">';
-                echo "<a class='nav-link' href='./scryptLogin.php'>Zaloguj</a>";
-                echo '</li>';
-              }
+              echo '<li class="nav-item">';
+              echo "<a class='nav-link' href='./scryptLogoff.php'>Wyloguj</a>";
+              echo '</li>';
+            } else {
+              echo '<li class="nav-item">';
+              echo "<a class='nav-link' href='./scryptLogin.php'>Zaloguj</a>";
+              echo '</li>';
+            }
 
-              ?>
-            </li>
+            ?>
 
           </ul>
         </div>
       </div>
     </nav>
   </header>
+  <div class="row featurette" style="text-align: center;">
+    <h2 style="color: red;" class="featurette-heading"><strong>Nie posiadasz uprawnień do oglądania tej strony!</strong></h2>
+  </div>
 
-  <main role="main">
-    <div class="container">
-      <div class="container marketing">
-        <br>
-        <div class="row featurette" style="text-align: center;">
-          <h2 class="featurette-heading"><strong>Logowanie Pracownicze</strong></h2>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <!-- Login Form -->
-        <form style="text-align: center;" action="./scryptLogin.php" method="post">
-          <input type="text" id="login" name="login" placeholder="login" value="
-<?php
-if (isset($_SESSION['fl_login'])) {
-  echo $_SESSION['fl_login'];
-  //		unset($_SESSION['fl_login']);
-}
-?>"> <br><br>
-          <input type="password" id="password" name="password" placeholder="hasło"><br><br>
-          <input type="submit" class="btn btn-md btn-primary" value="Zaloguj">
-        </form>
-
-        <hr class="featurette-divider">
-
-      </div>
-    </div>
+  </div>
   </main>
 
   <!-- Bootstrap core JavaScript

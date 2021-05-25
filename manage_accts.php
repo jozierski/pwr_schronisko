@@ -1,11 +1,11 @@
 <?php
 session_start();
+require_once('dataBase.php');
 if ($_SESSION['uprawnienia'] != 'admin') {
   header("Location: error.php");
   die();
 }
 ?>
-
 <!doctype html>
 <html lang="en">
 
@@ -13,7 +13,9 @@ if ($_SESSION['uprawnienia'] != 'admin') {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Nowe konto | Wesoły Zwierzak</title>
+  <title>Admin | Wesoły Zwierzak</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
 
   <!-- Bootstrap core CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
@@ -85,53 +87,47 @@ if ($_SESSION['uprawnienia'] != 'admin') {
   <main role="main">
     <div class="container">
       <div class="container marketing">
-        <br>
         <div class="row featurette" style="text-align: center;">
-          <h2 class="featurette-heading"><strong>Utwórz nowe konto</strong></h2>
+          <h2 class="featurette-heading"><strong>Zarządzaj kontami</strong></h2>
         </div>
-
         <hr class="featurette-divider">
+        <?php
+        $sqlQuery = "SELECT * FROM users";
+        $resultSet = mysqli_query($conn, $sqlQuery) or die("database error:" . mysqli_error($conn));
+        ?>
+        <table id="editableTable" class="table table-bordered">
+          <thead>
+            <tr>
+              <th>User_id</th>
+              <th>Imie</th>
+              <th>Nazwisko</th>
+              <th>Login</th>
+              <th>Uprawnienie</th>
+              <th>Data dołączenia</th>
+              <th>Liczba zwierząt pod opieką</th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php while ($row = mysqli_fetch_assoc($resultSet)) { ?>
+              <tr id="<?php echo $row['user_id']; ?>">
 
-        <!-- Login Form -->
-        <form style="text-align: center;" action="./scryptSignIn.php" method="post">
-          <input type="text" id="login" name="login" placeholder="login" value="
-<?php
-if (isset($_SESSION['fl_login'])) {
-  echo $_SESSION['fl_login'];
-  //		unset($_SESSION['fl_login']);
-}
-?>"> <br><br>
-          <input type="password" id="password" name="password" placeholder="hasło"><br><br>
-          <input type="text" id="imie" name="imie" placeholder="imie" value="
-<?php
-if (isset($_SESSION['fl_imie'])) {
-  echo $_SESSION['fl_imie'];
-  //		unset($_SESSION['fl_imie']);
-}
-?>"><br><br>
-          <input type="text" id="nazwisko" name="nazwisko" placeholder="nazwisko" value="
-<?php
-if (isset($_SESSION['fl_nazwisko'])) {
-  echo $_SESSION['fl_nazwisko'];
-  //		unset($_SESSION['fl_nazwisko']);
-}
-?>"><br><br>
-          <!--input type="text" id="uprawnienia" name="uprawnienia" placeholder="uprawnienia"value="
-<-?php
-              if (isset($_SESSION['fl_uprawnienia'])){
-                  echo $_SESSION['fl_uprawnienia'];
-//		unset($_SESSION['fl_uprawnienia']);
-              }
-              ?>"> <br><br-->
-          <input type="radio" id="opiekun" name="uprawnienia" placeholder="uprawnienia" value="opiekun">
-          <label for="opiekun">Opiekun</label><br>
+                <?php $sqlQuery2 = "SELECT COUNT(*) c FROM animals WHERE opiekun = " . $row['user_id'];
+                $result2 = mysqli_query($conn, $sqlQuery2) or die("database error:" . mysqli_error($conn));
+                $row2 = mysqli_fetch_array($result2) ?>
 
-          <input type="radio" id="admin" name="uprawnienia" placeholder="uprawnienia" value="admin">
-          <label for="admin">Admin</label>
-
-          <br><br><input type="submit" class="btn btn-md btn-primary" value="Dodaj">
-        </form>
-
+                <td><?php echo $row['user_id']; ?></td>
+                <td><?php echo $row['imie']; ?></td>
+                <td><?php echo $row['nazwisko']; ?></td>
+                <td><?php echo $row['login']; ?></td>
+                <td><?php echo $row['uprawnienia']; ?></td>
+                <td><?php echo $row['data_dolaczenia']; ?></td>
+                <td><?php echo $row2['c']; ?></td>
+                <td><a href="#" class="link-success">EDYTUJ</a></td>
+              </tr>
+            <?php } ?>
+          </tbody>
+        </table>
         <hr class="featurette-divider">
 
       </div>
