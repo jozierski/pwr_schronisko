@@ -40,7 +40,7 @@ require_once('dataBase.php');
               <a class="nav-link" href="home.php">Strona Główna</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="view.php">Przędlądaj zwierzęta</a>
+              <a class="nav-link" href="view.php">Przęglądaj zwierzęta</a>
             </li>
 
             <?php
