@@ -87,7 +87,7 @@ if (isset($_SESSION['zalogowany']) == false) {
       <div class="container marketing">
         <br>
         <div class="row featurette" style="text-align: center;">
-          <h2 class="featurette-heading"><strong>Utwórz nowe konto</strong></h2>
+          <h2 class="featurette-heading"><strong>Dodaj zwierzaka</strong></h2>
         </div>
 
         <hr class="featurette-divider">
