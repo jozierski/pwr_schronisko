@@ -29,6 +29,7 @@ session_start();
         echo $_SESSION['imie'], " ", $_SESSION['nazwisko'], "</p>";
       }
       ?>
+
       <div class="container">
         <img style="width: 150px; margin-right: 20px" src="src/logo.png">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">

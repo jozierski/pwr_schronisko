@@ -125,7 +125,7 @@
 		}
 		catch(Exception $e){
 			$_SESSION['error_msg']='<span style="color:red"> Błąd serwera </span>';
-			// echo '<br/>dev info: '.$e; //odkomentuj tutaj jeśli cos nie działa
+			$_SESSION['error_detail']=' '.$e; //odkomentuj tutaj jeśli cos nie działa
 			header('Location: ../profil.php');
 
 		}

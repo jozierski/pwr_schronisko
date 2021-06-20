@@ -104,8 +104,11 @@ if (isset($_SESSION['zalogowany']) == false) {
           <input type="number" id="opiekun" name="opiekun" placeholder="id opiekuna" required><br><br>
           
           <div style="text-align:center">
-          Nr. Chip'a (jeśli zachipowany):
+          10-cyfrowy Nr. Chip'a (jeśli zachipowany):
           <input type="number" id="nr_chipa" name="nr_chipa" placeholder="##########" pattern="[0-9]{10}" size="10 "><br><br>
+
+          Szacowany Wiek (lata):<br>
+          <input type="number" id="wiek" name="wiek" placeholder="wiek" required style="width:60px"><br><br>
 
           Rodzaj<br>
           <input type="radio" id="pies" name="rodzaj" value="pies" required>

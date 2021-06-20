@@ -34,11 +34,15 @@ if(isset($_POST['imie'])) {
         $_SESSION['e_opiekun'] = "Podaj poprawny nr opiekuna";
     }
     //sprawdzanie nr chipa
-    $chip = $_POST['nr_chipa'];
-    if (!preg_match('#^[a-z0-9]+$#i', $chip)) {
-        $sprawdzanie = false;
+    if ($_POST['nr_chipa'] < 1) {
         $chip = null;
-        $_SESSION['e_chip'] = "Podaj poprawny nr chipa";
+    } else {
+        $chip = $_POST['nr_chipa'];
+        if (!preg_match('#^[a-z0-9]+$#i', $chip)) {
+            $sprawdzanie = false;
+            $chip = null;
+            $_SESSION['e_chip'] = "Podaj poprawny nr chipa";
+        }
     }
     //sprawdzanie rodzaju
     $rodzaj = $_POST['rodzaj'];
@@ -63,6 +67,17 @@ if(isset($_POST['imie'])) {
         $wykastrowany = null;
         $_SESSION['e_wykastrowany'] = "Podaj poprawną plec";
 
+    }
+    //sprawdzanie wieku
+    $wiek = $_POST['wiek'];
+    if (!preg_match('#^[a-z0-9]+$#i', $wiek)) {
+        $sprawdzanie = false;
+        $wiek = null;
+        $_SESSION['e_wiek'] = "Podaj poprawny szacowany wiek";
+    } elseif (($wiek <= 0) || ($wiek > 20)) {
+        $sprawdzanie = false;
+        $wiek = null;
+        $_SESSION['e_wiek'] = "Podaj poprawny szacowany wiek";
     }
 
     require_once "./dataBase.php";
@@ -89,20 +104,20 @@ if(isset($_POST['imie'])) {
                 }
 
                 if (!$rezultat) throw new Exception($polaczenie->error);
-       
+
                 if ($sprawdzanie == true) {
                     //sprawdzano, dodawania konta do bazy
 
-                    if ($polaczenie->query("INSERT INTO `animals` (`animal_id`, `imie`, `nr_klatki`, `opiekun`, `rodzaj`, `plec`, `wykastrowany`, `nr_chipa`, `szacowany_wiek`, `data_dodania`, `stan`) VALUES (NULL, '$imie', '$nrKlatki', '$opiekun', '$rodzaj', '$plec', '$wykastrowany', '$chip', '9', NULL, NULL)")) {
+                    if ($polaczenie->query("INSERT INTO `animals` (`animal_id`, `imie`, `nr_klatki`, `opiekun`, `rodzaj`, `plec`, `wykastrowany`, `nr_chipa`, `szacowany_wiek`, `data_dodania`, `stan`) VALUES (NULL, '$imie', '$nrKlatki', '$opiekun', '$rodzaj', '$plec', '$wykastrowany', '$chip', '$wiek', CURRENT_DATE(), 'Oczekuje opisu.')")) {
 
                         //wiadomość i przekierowanie
-                        header('Location: ./add_animal.php');
+                        header('Location: ./manage_animals.php');
 
                     } else {
                         throw new Exception($polaczenie->error);
                     }
                 } else {
-                    header("Location: ./add_animal.php");
+                    header("Location: ./manage_animals.php");
                 }
 
                 $polaczenie->close();
@@ -111,8 +126,8 @@ if(isset($_POST['imie'])) {
     }
 
     catch(Exception $e){
-        $_SESSION['error_msg']='<span style="color:red"> Błąd serwera </span>';
-        // echo '<br/>dev info: '.$e; //odkomentuj tutaj jeśli cos nie działa
-        header('Location: ./home.php');
+        $_SESSION['error_msg']='<span style="color:red"> BŁĄD: </span>';
+        $_SESSION['error_detail']=' '.$e; //odkomentuj tutaj jeśli cos nie działa
+        header('Location: ./manage_animals.php');
     }
 }

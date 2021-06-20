@@ -89,7 +89,16 @@ if (isset($_SESSION['zalogowany']) == false) {
         <div class="row featurette" style="text-align: center;">
           <h2 class="featurette-heading"><strong>Zarządzaj zwierzętami</strong></h2>
         </div>
+
         <hr class="featurette-divider">
+        <?php
+        if (isset($_SESSION['error_msg'])) {
+          echo $_SESSION['error_msg'];
+          echo $_SESSION['error_detail'];
+          unset($_SESSION['error_msg']);
+          unset($_SESSION['error_detail']);
+        }
+        ?><br><br>
         <?php
         $sqlQuery = "SELECT * FROM animals";
         $resultSet = mysqli_query($conn, $sqlQuery) or die("database error:" . mysqli_error($conn));
@@ -138,14 +147,14 @@ if (isset($_SESSION['zalogowany']) == false) {
 
   <!-- Bootstrap core JavaScript
     ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script>
-    window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
-  </script>
-  <script src="../../assets/js/vendor/popper.min.js"></script>
-  <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>
+      window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+    </script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
 
-</body>
+  </body>
 
-</html>
+  </html>
