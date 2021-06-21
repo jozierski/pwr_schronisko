@@ -42,10 +42,7 @@ require_once('dataBase.php');
             <li class="nav-item active">
               <a class="nav-link" href="view.php">Przęglądaj zwierzęta</a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="search_animal.php">Wyszukaj zwierzęta</a>
-            </li>
-
+        
 
             <?php
             if (isset($_SESSION['uprawnienia']) && $_SESSION['uprawnienia'] == 'admin') {
@@ -61,6 +58,9 @@ require_once('dataBase.php');
 
             <?php
             if (isset($_SESSION['zalogowany']) && ($_SESSION['zalogowany']) == true) {
+              echo '<li class="nav-item active">';
+              echo '<a class="nav-link" href="search_animal.php">Wyszukaj zwierzęta</a>';
+              echo '</li>';
               echo '<li class="nav-item">';
               echo "<a class='nav-link' href='./manage_animals.php'>Zarządzaj zwierzętami</a>";
               echo '</li>';
