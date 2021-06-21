@@ -82,8 +82,11 @@ require_once('dataBase.php');
 
     <div class="container">
       <div class="container marketing">
-
+      <div class="row featurette" style="text-align: center;">
+          <h2 class="featurette-heading"><strong>Przeglądaj zwierzęta</strong></h2>
+        </div>
         <hr class="featurette-divider">
+        
         <?php
         $sqlQuery = "SELECT animal_id, imie, rodzaj, plec, szacowany_wiek, data_dodania, stan FROM animals";
         $resultSet = mysqli_query($conn, $sqlQuery) or die("database error:" . mysqli_error($conn));
