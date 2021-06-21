@@ -46,6 +46,9 @@ if ($_SESSION['uprawnienia'] != 'admin') {
             <li class="nav-item active">
               <a class="nav-link" href="view.php">Przęglądaj zwierzęta</a>
             </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="search_animal.php">Wyszukaj zwierzęta</a>
+            </li>
 
             <?php
             if (isset($_SESSION['uprawnienia']) && $_SESSION['uprawnienia'] == 'admin') {

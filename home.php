@@ -59,10 +59,14 @@ session_start();
             <li class="nav-item">
               <?php
               if (isset($_SESSION['zalogowany']) && ($_SESSION['zalogowany']) == true) {
+                echo '<li class="nav-item active">';
+                echo '<a class="nav-link" href="search_animal.php">Wyszukaj zwierzęta</a>';
+                echo '</li>';
                 echo '<li class="nav-item">';
                 echo "<a class='nav-link' href='./manage_animals.php'>Zarządzaj zwierzętami</a>";
                 echo '</li>';
-
+                
+  
                 echo '<li class="nav-item">';
                 echo "<a class='nav-link' href='./scryptLogoff.php'>Wyloguj</a>";
                 echo '</li>';

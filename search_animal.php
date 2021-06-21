@@ -88,7 +88,7 @@ if (isset($_SESSION['zalogowany']) == false) {
     <div class="container">
       <div class="container marketing">
         <div class="row featurette" style="text-align: center;">
-          <h2 class="featurette-heading"><strong>Wyszukaj zwierze</strong></h2>
+          <h2 class="featurette-heading"><strong>Wyszukaj zwierzęta</strong></h2>
         </div>
         <hr class="featurette-divider">
         <?php
@@ -104,8 +104,8 @@ if (isset($_SESSION['zalogowany']) == false) {
         <input type="text" id="imie" name="search" placeholder="" /><br><br>
         <input type="submit" class="btn btn-md btn-primary" value="Wyszukaj"/>
         </form>
-        <hr class="featurette-divider">
-        <p class="featurette-divider" style="text-align: center;"><strong>Wyniki wyszukiwania</strong> </p>
+        <hr class="featurette-divider"> 
+        <p style="text-align: center;"><strong>Wyniki wyszukiwania</strong> </p>
         <table id="editableTable" class="table table-bordered">
           <thead>
             <tr>
@@ -137,7 +137,6 @@ if (isset($_SESSION['zalogowany']) == false) {
             <?php } }?>
           </tbody>
         </table>
-
       </div>
     </div>
   </main>
